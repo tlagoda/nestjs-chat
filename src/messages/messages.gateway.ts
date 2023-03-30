@@ -8,6 +8,7 @@ import {
 import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { Server, Socket } from 'socket.io';
+import { isType } from '@babel/types';
 
 @WebSocketGateway({
   cors: {
@@ -43,7 +44,11 @@ export class MessagesGateway {
   }
 
   @SubscribeMessage('typing')
-  async typing() {
-    //todo
+  async typing(
+    @MessageBody('isTyping') isTyping: boolean,
+    @ConnectedSocket() client: Socket,
+  ) {
+    const name = await this.messagesService.getClientName(client.id);
+    client.broadcast.emit('typing', { name, isTyping });
   }
 }
