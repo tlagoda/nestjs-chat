@@ -24,7 +24,6 @@ export class MessagesService {
       text: createMessageDto.text,
     };
     this.messages.push(message);
-    console.log(message)
     return message;
   }
 
