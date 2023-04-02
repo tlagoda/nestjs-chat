@@ -5,7 +5,7 @@ import { UpdateMessageDto } from './dto/update-message.dto';
 
 @Injectable()
 export class MessagesService {
-  messages: Message[] = [{ name: 'Thibaut', text: 'Hello world!' }];
+  messages: Message[] = [];
   clientToUser = {};
 
   identify(name: string, clientId: string) {
